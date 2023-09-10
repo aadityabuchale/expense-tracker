@@ -59,11 +59,20 @@ function renderExpences() {
                     ${exp.info}
                 </p>
 
-                <span class="show-money">${exp.amount}Rs</span>
-                <button class="delete-entry btn btn-danger btn-outline">Delete</button>
+                <span class="show-money">${exp.amount} Rs</span>
             </li>
         `;
     });
+
+    let balanceSpan = document.querySelector(".balance");
+
+    balanceSpan.innerHTML = parseInt(getBasicInfoFromStorage().totalAmount);
+
+    if (parseInt(getBasicInfoFromStorage().totalAmount) < 0) {
+        balanceSpan.style.color = "red";
+    } else {
+        balanceSpan.style.color = "green";
+    }
 }
 
 renderExpences();
@@ -120,8 +129,7 @@ submitBtn.addEventListener("click", function () {
                         ${exp.info}
                     </p>
     
-                    <span class="show-money">${exp.amount}Rs</span>
-                    <button class="delete-entry btn btn-danger btn-outline">Delete</button>
+                    <span class="show-money">${exp.amount} Rs</span>
                 </li>
             `;
         });
@@ -131,17 +139,26 @@ submitBtn.addEventListener("click", function () {
 let deleteExpense = document.querySelector(".delete-entry");
 let ulContainer = document.querySelector(".history-ul");
 
-ulContainer.addEventListener("click", (e) => {
-    if (e.target.classList.contains("delete-entry")) {
-        if (e.target.parentNode.tagName === "LI") {
-            removeExpenseInfoFromLocalStorage(e.target.parentNode);
-            renderExpences();
-        } else if (e.target.tagName === "LI") {
-            removeExpenseInfoFromLocalStorage(e.target);
-            renderExpences();
-        }
-    }
+deleteExpense.addEventListener("click", () => {
+    localStorage.setItem("expenceArr", JSON.stringify([]));
+    localStorage.setItem(
+        "basicInfo",
+        JSON.stringify({ ...getBasicInfoFromStorage(), totalAmount: 0 })
+    );
+    renderExpences();
 });
+
+// ulContainer.addEventListener("click", (e) => {
+//     if (e.target.classList.contains("delete-entry")) {
+//         if (e.target.parentNode.tagName === "LI") {
+//             removeExpenseInfoFromLocalStorage(e.target.parentNode);
+//             renderExpences();
+//         } else if (e.target.tagName === "LI") {
+//             removeExpenseInfoFromLocalStorage(e.target);
+//             renderExpences();
+//         }
+//     }
+// });
 
 function addRemoveForm() {
     // console.log(getBasicInfoFromStorage()?.name);

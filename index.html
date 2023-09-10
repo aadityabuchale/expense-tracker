@@ -51,11 +51,13 @@
                         </div>
                         <div class="button-container">
                             <input
+                                required
                                 type="radio"
                                 name="flexRadioDefault"
                                 class="form-check-input check-spent text-danger"
                             />Money Spent
                             <input
+                                required
                                 type="radio"
                                 name="flexRadioDefault"
                                 class="form-check-input check-earned text-success"
@@ -68,7 +70,16 @@
                     </div>
                 </div>
                 <div class="history-container">
-                    <h1>History</h1>
+                    <h1>
+                        History
+                        <span
+                            ><button
+                                class="delete-entry btn btn-danger btn-outline"
+                            >
+                                Delete All
+                            </button></span
+                        >
+                    </h1>
                     <ul class="history-ul"></ul>
                 </div>
             </div>
@@ -96,13 +107,12 @@
                                     <div class="form-outline form-white mb-4">
                                         <input
                                             type="text"
-                                            class="name-input"
-                                            id="typeEmailX"
-                                            class="form-control form-control-lg"
+                                            id="typeNameX"
+                                            class="form-control name-input form-control-lg"
                                         />
                                         <label
                                             class="form-label"
-                                            for="typeEmailX"
+                                            for="typeNameX"
                                             >Name</label
                                         >
                                     </div>
@@ -110,13 +120,12 @@
                                     <div class="form-outline form-white mb-4">
                                         <input
                                             type="email"
-                                            id="typePasswordX"
-                                            class="email-input"
-                                            class="form-control form-control-lg"
+                                            id="typeEmailX"
+                                            class="form-control email-input form-control-lg"
                                         />
                                         <label
                                             class="form-label"
-                                            for="typePasswordX"
+                                            for="typeEmailX"
                                             >Email</label
                                         >
                                     </div>
