@@ -64,6 +64,7 @@ body {
     align-items: center;
     gap: 10px;
     height: 90%;
+    overflow: scroll;
 }
 
 .history-ul li {

@@ -18,12 +18,19 @@ function addExpenseToStorage(eInfo) {
 function removeExpenseInfoFromLocalStorage(eInfo) {
     let expenceArr = getExpenseFromStorage();
 
-    console.log(eInfo.children[1].innerText);
+    let price = eInfo.children[1].innerText.substring(
+        0,
+        eInfo.children[1].innerText.length - 2
+    );
 
     let filteredExpences = expenceArr.filter((expence) => {
         return (
             expence.info != eInfo.children[0].innerText.trim() &&
-            expence.amount != eInfo.children[1].innerText.trim()
+            expence.amount !=
+                eInfo.children[1].innerText.substring(
+                    0,
+                    eInfo.children[1].innerText.length - 2
+                )
         );
     });
 
@@ -31,7 +38,7 @@ function removeExpenseInfoFromLocalStorage(eInfo) {
 }
 
 document.querySelector(".balance").innerText = JSON.parse(
-    getBasicInfoFromStorage()?.totalAmount === undefined
+    !getBasicInfoFromStorage()?.totalAmount
         ? 0
         : getBasicInfoFromStorage().totalAmount
 );
@@ -137,7 +144,7 @@ ulContainer.addEventListener("click", (e) => {
 });
 
 function addRemoveForm() {
-    console.log(getBasicInfoFromStorage()?.name);
+    // console.log(getBasicInfoFromStorage()?.name);
     if (
         getExpenseFromStorage().length === 0 &&
         !getBasicInfoFromStorage()?.name
@@ -146,15 +153,13 @@ function addRemoveForm() {
         document.querySelector(".info-form").style.display = "block";
         document.querySelector(".main-container").style.display = "none";
 
-        console.log("aimhere");
-
         let btn = document.querySelector(".submit-info");
 
         btn.addEventListener("click", () => {
             let obj = {
                 name: document.querySelector(".name-input").value,
                 email: document.querySelector(".email-input").value,
-                amount: 0,
+                totalAmount: 0,
             };
 
             localStorage.setItem("basicInfo", JSON.stringify(obj));
