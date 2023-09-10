@@ -54,8 +54,12 @@ function renderExpences() {
 
     expenceArr.forEach((exp) => {
         ulContainer.innerHTML += `
-            <li>
-                <p class="show-info">
+        <li style="border:${
+            exp.isSpent
+                ? "1.5px solid rgb(216, 82, 82)"
+                : "1.5px solid rgb(103, 200, 103)"
+        }">
+                <p class="show-info" >
                     ${exp.info}
                 </p>
 
@@ -96,11 +100,15 @@ submitBtn.addEventListener("click", function () {
                 ...basicInfo,
                 totalAmount: parseInt(basicInfo.totalAmount) - amount,
             };
+
+            expenseObj["isSpent"] = true;
         } else if (checkEarned.checked) {
             basicInfo = {
                 ...basicInfo,
                 totalAmount: parseInt(basicInfo.totalAmount) + amount,
             };
+
+            expenseObj["isSpent"] = false;
         }
 
         addExpenseToStorage(expenseObj);
@@ -117,14 +125,17 @@ submitBtn.addEventListener("click", function () {
         }
 
         let ulContainer = document.querySelector(".history-ul");
-
         let expenceArr = getExpenseFromStorage();
 
         ulContainer.innerHTML = "";
 
         expenceArr.forEach((exp) => {
             ulContainer.innerHTML += `
-                <li>
+                    <li style="border:${
+                        exp.isSpent
+                            ? "1.5px solid rgb(216, 82, 82)"
+                            : "1.5px solid rgb(103, 200, 103)"
+                    }">
                     <p class="show-info">
                         ${exp.info}
                     </p>
